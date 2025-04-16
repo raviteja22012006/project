@@ -239,6 +239,26 @@
                     <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="php">Details</button>
                 </div>
             </div>
+            
+            <!-- New Bootstrap Course Card -->
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="bootstrap">
+                    <img src="bootstrap.png" alt="Bootstrap" class="course-img">
+                    <h3 class="course-title">Bootstrap</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="bootstrap">Details</button>
+                </div>
+            </div>
+            
+            <!-- New Git Course Card -->
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="git">
+                    <img src="git.png" alt="Git" class="course-img">
+                    <h3 class="course-title">Git</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="git">Details</button>
+                </div>
+            </div>
         </div>
         
         <div class="enroll-btn-container">
@@ -313,6 +333,14 @@
                 'php': {
                     title: 'PHP Programming',
                     content: '<p>PHP is a server-side scripting language designed for web development.</p><ul><li>Duration: 8 weeks</li><li>Level: Intermediate</li><li>Topics: Syntax, MySQL, Forms</li></ul>'
+                },
+                'bootstrap': {
+                    title: 'Bootstrap Framework',
+                    content: '<p>Bootstrap is the most popular CSS framework for developing responsive and mobile-first websites.</p><ul><li>Duration: 5 weeks</li><li>Level: Beginner</li><li>Topics: Grid System, Components, Utilities</li></ul>'
+                },
+                'git': {
+                    title: 'Git Version Control',
+                    content: '<p>Git is a distributed version control system for tracking changes in source code during software development.</p><ul><li>Duration: 4 weeks</li><li>Level: Beginner</li><li>Topics: Repositories, Branching, Merging</li></ul>'
                 }
             };
             
@@ -350,7 +378,8 @@
                     }
                 });
             });
-                        if (courseModal) {
+            
+            if (courseModal) {
                 courseModal.addEventListener('show.bs.modal', function(event) {
                     const button = event.relatedTarget;
                     const courseId = button.getAttribute('data-course');
