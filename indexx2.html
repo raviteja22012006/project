@@ -50,6 +50,7 @@
             position: relative;
             overflow: hidden;
             border: 2px solid transparent;
+            cursor: pointer;
         }
         
         .course-card:hover {
@@ -80,6 +81,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
+            pointer-events: none; /* Prevent checkbox from interfering with card click */
         }
         
         .details-btn {
@@ -93,6 +95,7 @@
             border: none;
             border-radius: 5px;
             font-size: 0.9rem;
+            pointer-events: none; /* Prevent button from interfering with card click */
         }
         
         .selection-counter {
@@ -136,6 +139,44 @@
         .modal-footer {
             border-top: none;
         }
+        
+        /* Hide the actual checkbox visually but keep it accessible */
+        .course-checkbox {
+            opacity: 0;
+            position: absolute;
+        }
+        
+        /* Custom checkbox indicator */
+        .course-card::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.2s;
+        }
+        
+        .course-card.selected::after {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        
+        .course-card.selected::before {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -151,17 +192,16 @@
         
         <div class="row">
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
-                    <label for="c">
+                <div class="course-card" onclick="toggleCourseSelection('c')">
                     <input type="checkbox" class="course-checkbox" id="c">
                     <img src="clog.png" alt="C Programming" class="course-img">
-                    <h3 class="course-title">C Programming</h3></label>
+                    <h3 class="course-title">C Programming</h3>
                     <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="c">Details</button>
                 </div>
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
+                <div class="course-card" onclick="toggleCourseSelection('python')">
                     <input type="checkbox" class="course-checkbox" id="python">
                     <img src="py.png" alt="Python" class="course-img">
                     <h3 class="course-title">Python</h3>
@@ -170,7 +210,7 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
+                <div class="course-card" onclick="toggleCourseSelection('java')">
                     <input type="checkbox" class="course-checkbox" id="java">
                     <img src="javalog.png" alt="Java" class="course-img">
                     <h3 class="course-title">Java</h3>
@@ -179,7 +219,7 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
+                <div class="course-card" onclick="toggleCourseSelection('cpp')">
                     <input type="checkbox" class="course-checkbox" id="cpp">
                     <img src="c+++.jpg" alt="C++" class="course-img">
                     <h3 class="course-title">C++</h3>
@@ -188,7 +228,7 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
+                <div class="course-card" onclick="toggleCourseSelection('sql')">
                     <input type="checkbox" class="course-checkbox" id="sql">
                     <img src="sql.png" alt="SQL" class="course-img">
                     <h3 class="course-title">SQL</h3>
@@ -197,7 +237,7 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
+                <div class="course-card" onclick="toggleCourseSelection('html')">
                     <input type="checkbox" class="course-checkbox" id="html">
                     <img src="htm.png" alt="HTML" class="course-img">
                     <h3 class="course-title">HTML</h3>
@@ -206,7 +246,7 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
+                <div class="course-card" onclick="toggleCourseSelection('css')">
                     <input type="checkbox" class="course-checkbox" id="css">
                     <img src="css.svg" alt="CSS" class="course-img" style="width: 100px;">
                     <h3 class="course-title">CSS</h3>
@@ -215,7 +255,7 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
+                <div class="course-card" onclick="toggleCourseSelection('dsa')">
                     <input type="checkbox" class="course-checkbox" id="dsa">
                     <img src="dsa.jpg" alt="Data Structures" class="course-img">
                     <h3 class="course-title">Data Structures</h3>
@@ -224,7 +264,7 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
+                <div class="course-card" onclick="toggleCourseSelection('js')">
                     <input type="checkbox" class="course-checkbox" id="js">
                     <img src="js.webp" alt="JavaScript" class="course-img">
                     <h3 class="course-title">JavaScript</h3>
@@ -233,7 +273,7 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
+                <div class="course-card" onclick="toggleCourseSelection('php')">
                     <input type="checkbox" class="course-checkbox" id="php">
                     <img src="php.png" alt="PHP" class="course-img">
                     <h3 class="course-title">PHP</h3>
@@ -243,7 +283,7 @@
             
             <!-- New Bootstrap Course Card -->
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
+                <div class="course-card" onclick="toggleCourseSelection('bootstrap')">
                     <input type="checkbox" class="course-checkbox" id="bootstrap">
                     <img src="BOOT.png" alt="Bootstrap" class="course-img">
                     <h3 class="course-title">Bootstrap</h3>
@@ -253,7 +293,7 @@
             
             <!-- New Git Course Card -->
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card">
+                <div class="course-card" onclick="toggleCourseSelection('git')">
                     <input type="checkbox" class="course-checkbox" id="git">
                     <img src="GIT.png" alt="Git" class="course-img">
                     <h3 class="course-title">Git</h3>
@@ -345,6 +385,27 @@
                 }
             };
             
+            // Global function to toggle course selection
+            window.toggleCourseSelection = function(courseId) {
+                const checkbox = document.getElementById(courseId);
+                const courseCard = checkbox.parentElement;
+                
+                // Only toggle if not disabled
+                if (!checkbox.disabled || checkbox.checked) {
+                    checkbox.checked = !checkbox.checked;
+                    courseCard.classList.toggle('selected', checkbox.checked);
+                    updateSelectionCount();
+                    
+                    const selectedCount = document.querySelectorAll('.course-checkbox:checked').length;
+                    if (selectedCount > maxSelection) {
+                        checkbox.checked = false;
+                        courseCard.classList.remove('selected');
+                        alert(`You can select a maximum of ${maxSelection} courses.`);
+                        updateSelectionCount();
+                    }
+                }
+            };
+            
             function updateSelectionCount() {
                 const selectedCount = document.querySelectorAll('.course-checkbox:checked').length;
                 selectedCountElement.textContent = selectedCount;
@@ -364,20 +425,18 @@
                 }
             }
             
+            // Initialize checkboxes state
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     const courseCard = this.parentElement;
                     courseCard.classList.toggle('selected', this.checked);
                     updateSelectionCount();
-                    
-                    const selectedCount = document.querySelectorAll('.course-checkbox:checked').length;
-                    if (selectedCount > maxSelection) {
-                        this.checked = false;
-                        courseCard.classList.remove('selected');
-                        alert(`You can select a maximum of ${maxSelection} courses.`);
-                        updateSelectionCount();
-                    }
                 });
+                
+                // Set initial selected state
+                if (checkbox.checked) {
+                    checkbox.parentElement.classList.add('selected');
+                }
             });
             
             if (courseModal) {
