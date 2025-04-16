@@ -82,6 +82,7 @@
             top: 10px;
             right: 10px;
             pointer-events: none;
+            opacity: 0;
         }
         
         .details-btn {
@@ -95,7 +96,7 @@
             border: none;
             border-radius: 5px;
             font-size: 0.9rem;
-            pointer-events: none; 
+            z-index: 2; 
         }
         
         .selection-counter {
@@ -140,11 +141,6 @@
             border-top: none;
         }
         
-        .course-checkbox {
-            opacity: 0;
-            position: absolute;
-        }
-        
         .course-card::after {
             content: '';
             position: absolute;
@@ -175,6 +171,15 @@
             line-height: 20px;
             z-index: 1;
         }
+        
+        .course-card .clickable-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 40px; 
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -190,7 +195,8 @@
         
         <div class="row">
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('c')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('c')"></div>
                     <input type="checkbox" class="course-checkbox" id="c">
                     <img src="clog.png" alt="C Programming" class="course-img">
                     <h3 class="course-title">C Programming</h3>
@@ -199,7 +205,8 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('python')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('python')"></div>
                     <input type="checkbox" class="course-checkbox" id="python">
                     <img src="py.png" alt="Python" class="course-img">
                     <h3 class="course-title">Python</h3>
@@ -208,7 +215,8 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('java')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('java')"></div>
                     <input type="checkbox" class="course-checkbox" id="java">
                     <img src="javalog.png" alt="Java" class="course-img">
                     <h3 class="course-title">Java</h3>
@@ -217,7 +225,8 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('cpp')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('cpp')"></div>
                     <input type="checkbox" class="course-checkbox" id="cpp">
                     <img src="c+++.jpg" alt="C++" class="course-img">
                     <h3 class="course-title">C++</h3>
@@ -226,7 +235,8 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('sql')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('sql')"></div>
                     <input type="checkbox" class="course-checkbox" id="sql">
                     <img src="sql.png" alt="SQL" class="course-img">
                     <h3 class="course-title">SQL</h3>
@@ -235,7 +245,8 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('html')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('html')"></div>
                     <input type="checkbox" class="course-checkbox" id="html">
                     <img src="htm.png" alt="HTML" class="course-img">
                     <h3 class="course-title">HTML</h3>
@@ -244,7 +255,8 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('css')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('css')"></div>
                     <input type="checkbox" class="course-checkbox" id="css">
                     <img src="css.svg" alt="CSS" class="course-img" style="width: 100px;">
                     <h3 class="course-title">CSS</h3>
@@ -253,7 +265,8 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('dsa')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('dsa')"></div>
                     <input type="checkbox" class="course-checkbox" id="dsa">
                     <img src="dsa.jpg" alt="Data Structures" class="course-img">
                     <h3 class="course-title">Data Structures</h3>
@@ -262,7 +275,8 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('js')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('js')"></div>
                     <input type="checkbox" class="course-checkbox" id="js">
                     <img src="js.webp" alt="JavaScript" class="course-img">
                     <h3 class="course-title">JavaScript</h3>
@@ -271,7 +285,8 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('php')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('php')"></div>
                     <input type="checkbox" class="course-checkbox" id="php">
                     <img src="php.png" alt="PHP" class="course-img">
                     <h3 class="course-title">PHP</h3>
@@ -280,7 +295,8 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('bootstrap')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('bootstrap')"></div>
                     <input type="checkbox" class="course-checkbox" id="bootstrap">
                     <img src="BOOT.png" alt="Bootstrap" class="course-img">
                     <h3 class="course-title">Bootstrap</h3>
@@ -289,7 +305,8 @@
             </div>
             
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="course-card" onclick="toggleCourseSelection('git')">
+                <div class="course-card">
+                    <div class="clickable-area" onclick="toggleCourseSelection('git')"></div>
                     <input type="checkbox" class="course-checkbox" id="git">
                     <img src="GIT.png" alt="Git" class="course-img">
                     <h3 class="course-title">Git</h3>
@@ -433,6 +450,8 @@
             
             if (courseModal) {
                 courseModal.addEventListener('show.bs.modal', function(event) {
+                    event.stopPropagation();
+                    
                     const button = event.relatedTarget;
                     const courseId = button.getAttribute('data-course');
                     const course = courseDetails[courseId];
