@@ -81,7 +81,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            pointer-events: none; /* Prevent checkbox from interfering with card click */
+            pointer-events: none;
         }
         
         .details-btn {
@@ -95,7 +95,7 @@
             border: none;
             border-radius: 5px;
             font-size: 0.9rem;
-            pointer-events: none; /* Prevent button from interfering with card click */
+            pointer-events: none; 
         }
         
         .selection-counter {
@@ -140,13 +140,11 @@
             border-top: none;
         }
         
-        /* Hide the actual checkbox visually but keep it accessible */
         .course-checkbox {
             opacity: 0;
             position: absolute;
         }
         
-        /* Custom checkbox indicator */
         .course-card::after {
             content: '';
             position: absolute;
@@ -281,7 +279,6 @@
                 </div>
             </div>
             
-            <!-- New Bootstrap Course Card -->
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="course-card" onclick="toggleCourseSelection('bootstrap')">
                     <input type="checkbox" class="course-checkbox" id="bootstrap">
@@ -291,7 +288,6 @@
                 </div>
             </div>
             
-            <!-- New Git Course Card -->
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="course-card" onclick="toggleCourseSelection('git')">
                     <input type="checkbox" class="course-checkbox" id="git">
@@ -385,12 +381,10 @@
                 }
             };
             
-            // Global function to toggle course selection
             window.toggleCourseSelection = function(courseId) {
                 const checkbox = document.getElementById(courseId);
                 const courseCard = checkbox.parentElement;
                 
-                // Only toggle if not disabled
                 if (!checkbox.disabled || checkbox.checked) {
                     checkbox.checked = !checkbox.checked;
                     courseCard.classList.toggle('selected', checkbox.checked);
@@ -425,7 +419,6 @@
                 }
             }
             
-            // Initialize checkboxes state
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     const courseCard = this.parentElement;
@@ -433,7 +426,6 @@
                     updateSelectionCount();
                 });
                 
-                // Set initial selected state
                 if (checkbox.checked) {
                     checkbox.parentElement.classList.add('selected');
                 }
