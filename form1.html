@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .registration-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .registration-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .form-control {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        
+        .btn-submit {
+            background-color: #28a745;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 500;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+        
+        .form-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 0.875em;
+            display: none;
+        }
+        
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+        
+        .success-modal .modal-header {
+            background-color: #2ac4eb;
+            color: white;
+        }
+        
+        .success-modal .modal-body {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .success-modal .modal-body i {
+            font-size: 4rem;
+            color: #2ac4eb;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="registration-container">
+            <div class="registration-header">
+                <h2>Student Registration</h2>
+                <p class="text-muted">Fill all the required details</p>
+            </div>
+            
+            <form id="registrationForm" novalidate>
+                <div class="form-section">
+                    <h5 class="section-title">Student Information</h5>
+                    
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name*</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        <div class="invalid-feedback" id="nameFeedback">
+                           Fill in a proper name
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="mobile" class="form-label">Mobile Number*</label>
+                        <input type="tel" class="form-control" id="mobile" name="mobile" required>
+                        <div class="invalid-feedback" id="mobileFeedback">
+                            Enter a valid 10-digit mobile number
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address*</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                        <div class="invalid-feedback" id="emailFeedback">
+                            Enter a valid email address
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h5 class="section-title">Parent Information</h5>
+                    
+                    <div class="mb-3">
+                        <label for="pname" class="form-label">Parent Name*</label>
+                        <input type="text" class="form-control" id="pname" name="pname" required>
+                        <div class="invalid-feedback" id="pnameFeedback">
+                            Fill in a proper name
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="pmobile" class="form-label">Parent Mobile*</label>
+                        <input type="tel" class="form-control" id="pmobile" name="pmobile" required>
+                        <div class="invalid-feedback" id="pmobileFeedback">
+                            Enter a valid 10-digit mobile number
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="pemail" class="form-label">Parent Email*</label>
+                        <input type="email" class="form-control" id="pemail" name="pemail" required>
+                        <div class="invalid-feedback" id="pemailFeedback">
+                            Enter a valid email address
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-submit">Register Now</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade success-modal" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registration Successful!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Thank you for registering!</h4>
+                    <p>Your registration has been successfully submitted.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="redirectBtn">Home</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            const redirectBtn = document.getElementById('redirectBtn');
+            
+            redirectBtn.addEventListener('click', function() {
+                window.location.href = "indexx.html"; 
+            });
+            
+            const namePattern = /^[A-Za-z][A-Za-z0-9]{5,}$/;
+            const mobilePattern = /^\d{10}$/;
+            const emailPattern = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
+            
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                
+                let isValid = true;
+                
+                const name = document.getElementById('name');
+                if (!namePattern.test(name.value)) {
+                    name.classList.add('is-invalid');
+                    document.getElementById('nameFeedback').style.display = 'block';
+                    isValid = false;
+                } else {
+                    name.classList.remove('is-invalid');
+                    document.getElementById('nameFeedback').style.display = 'none';
+                }
+                
+                const mobile = document.getElementById('mobile');
+                if (!mobilePattern.test(mobile.value)) {
+                    mobile.classList.add('is-invalid');
+                    document.getElementById('mobileFeedback').style.display = 'block';
+                    isValid = false;
+                } else {
+                    mobile.classList.remove('is-invalid');
+                    document.getElementById('mobileFeedback').style.display = 'none';
+                }
+                
+                const email = document.getElementById('email');
+                if (!emailPattern.test(email.value)) {
+                    email.classList.add('is-invalid');
+                    document.getElementById('emailFeedback').style.display = 'block';
+                    isValid = false;
+                } else {
+                    email.classList.remove('is-invalid');
+                    document.getElementById('emailFeedback').style.display = 'none';
+                }
+                
+                const pname = document.getElementById('pname');
+                if (!namePattern.test(pname.value)) {
+                    pname.classList.add('is-invalid');
+                    document.getElementById('pnameFeedback').style.display = 'block';
+                    isValid = false;
+                } else {
+                    pname.classList.remove('is-invalid');
+                    document.getElementById('pnameFeedback').style.display = 'none';
+                }
+                
+                const pmobile = document.getElementById('pmobile');
+                if (!mobilePattern.test(pmobile.value)) {
+                    pmobile.classList.add('is-invalid');
+                    document.getElementById('pmobileFeedback').style.display = 'block';
+                    isValid = false;
+                } else {
+                    pmobile.classList.remove('is-invalid');
+                    document.getElementById('pmobileFeedback').style.display = 'none';
+                }
+                
+                const pemail = document.getElementById('pemail');
+                if (!emailPattern.test(pemail.value)) {
+                    pemail.classList.add('is-invalid');
+                    document.getElementById('pemailFeedback').style.display = 'block';
+                    isValid = false;
+                } else {
+                    pemail.classList.remove('is-invalid');
+                    document.getElementById('pemailFeedback').style.display = 'none';
+                }
+                
+                if (isValid) {
+                    successModal.show();
+                } else {
+                    const firstInvalid = form.querySelector('.is-invalid');
+                    if (firstInvalid) {
+                        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+                
+                form.classList.add('was-validated');
+            });
+            
+            form.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', function() {
+                    if (this.classList.contains('is-invalid')) {
+                        this.classList.remove('is-invalid');
+                        const feedbackId = this.id + 'Feedback';
+                        document.getElementById(feedbackId).style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

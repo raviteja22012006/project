@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Courses</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+        }
+        
+        .page-header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .divider {
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 10px auto 30px;
+        }
+        
+        .courses-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            width: 100%;
+            height: 180px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .course-card.selected {
+            border-color: var(--accent-color);
+            background-color: rgba(39, 174, 96, 0.05);
+        }
+        
+        .course-img {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 10px;
+        }
+        
+        .course-title {
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .course-checkbox {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        
+        .details-btn {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .selection-counter {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        .enroll-btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .enroll-btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .modal-content {
+            border-radius: 10px;
+        }
+        
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom: none;
+        }
+        
+        .modal-footer {
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <h1>COURSES OFFERED</h1>
+        <div class="divider"></div>
+    </header>
+    
+    <main class="courses-container">
+        <div class="selection-counter">
+            Selected: <span id="selected-count">0</span>/5 courses
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="c">
+                    <img src="clog.png" alt="C Programming" class="course-img">
+                    <h3 class="course-title">C Programming</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="c">Details</button>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="python">
+                    <img src="py.png" alt="Python" class="course-img">
+                    <h3 class="course-title">Python</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="python">Details</button>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="java">
+                    <img src="javalog.png" alt="Java" class="course-img">
+                    <h3 class="course-title">Java</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="java">Details</button>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="cpp">
+                    <img src="c+++.jpg" alt="C++" class="course-img">
+                    <h3 class="course-title">C++</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="cpp">Details</button>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="sql">
+                    <img src="sql.png" alt="SQL" class="course-img">
+                    <h3 class="course-title">SQL</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="sql">Details</button>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="html">
+                    <img src="htm.png" alt="HTML" class="course-img">
+                    <h3 class="course-title">HTML</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="html">Details</button>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="css">
+                    <img src="css.svg" alt="CSS" class="course-img" style="width: 100px;">
+                    <h3 class="course-title">CSS</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="css">Details</button>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="dsa">
+                    <img src="dsa.jpg" alt="Data Structures" class="course-img">
+                    <h3 class="course-title">Data Structures</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="dsa">Details</button>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="js">
+                    <img src="js.webp" alt="JavaScript" class="course-img">
+                    <h3 class="course-title">JavaScript</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="js">Details</button>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="course-card">
+                    <input type="checkbox" class="course-checkbox" id="php">
+                    <img src="php.png" alt="PHP" class="course-img">
+                    <h3 class="course-title">PHP</h3>
+                    <button class="details-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-course="php">Details</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="enroll-btn-container">
+            <a href="form1.html" class="enroll-btn">ENROLL NOW</a>
+        </div>
+        <div class="modal fade" id="courseModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Course Details</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modalBody">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Programming Courses. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.course-checkbox');
+            const maxSelection = 5;
+            const selectedCountElement = document.getElementById('selected-count');
+            const courseModal = document.getElementById('courseModal');
+            
+            const courseDetails = {
+                'c': {
+                    title: 'C Programming',
+                    content: '<p>C is a foundational programming language that teaches core concepts used in many other languages.</p><ul><li>Duration: 8 weeks</li><li>Level: Beginner</li><li>Topics: Variables, Loops, Functions, Pointers</li></ul>'
+                },
+                'python': {
+                    title: 'Python Programming',
+                    content: '<p>Python is a versatile language used for web development, data analysis, AI, and more.</p><ul><li>Duration: 10 weeks</li><li>Level: Beginner</li><li>Topics: Syntax, OOP, Libraries</li></ul>'
+                },
+                'java': {
+                    title: 'Java Programming',
+                    content: '<p>Java is an object-oriented language used for enterprise applications and Android development.</p><ul><li>Duration: 12 weeks</li><li>Level: Intermediate</li><li>Topics: Classes, Inheritance, Collections</li></ul>'
+                },
+                'cpp': {
+                    title: 'C++ Programming',
+                    content: '<p>C++ extends C with object-oriented features and is used for system/software development.</p><ul><li>Duration: 10 weeks</li><li>Level: Intermediate</li><li>Topics: OOP, Templates, STL</li></ul>'
+                },
+                'sql': {
+                    title: 'SQL Database',
+                    content: '<p>SQL is used for managing and querying relational databases.</p><ul><li>Duration: 6 weeks</li><li>Level: Beginner</li><li>Topics: Queries, Joins, Normalization</li></ul>'
+                },
+                'html': {
+                    title: 'HTML5',
+                    content: '<p>HTML is the standard markup language for creating web pages.</p><ul><li>Duration: 4 weeks</li><li>Level: Beginner</li><li>Topics: Tags, Forms, Semantic HTML</li></ul>'
+                },
+                'css': {
+                    title: 'CSS3',
+                    content: '<p>CSS is used for styling and layout of web pages.</p><ul><li>Duration: 5 weeks</li><li>Level: Beginner</li><li>Topics: Selectors, Flexbox, Grid</li></ul>'
+                },
+                'dsa': {
+                    title: 'Data Structures & Algorithms',
+                    content: '<p>Learn fundamental data structures and algorithms for efficient programming.</p><ul><li>Duration: 14 weeks</li><li>Level: Intermediate</li><li>Topics: Arrays, Trees, Sorting</li></ul>'
+                },
+                'js': {
+                    title: 'JavaScript',
+                    content: '<p>JavaScript makes web pages interactive and is essential for front-end development.</p><ul><li>Duration: 8 weeks</li><li>Level: Beginner</li><li>Topics: DOM, Events, AJAX</li></ul>'
+                },
+                'php': {
+                    title: 'PHP Programming',
+                    content: '<p>PHP is a server-side scripting language designed for web development.</p><ul><li>Duration: 8 weeks</li><li>Level: Intermediate</li><li>Topics: Syntax, MySQL, Forms</li></ul>'
+                }
+            };
+            
+            function updateSelectionCount() {
+                const selectedCount = document.querySelectorAll('.course-checkbox:checked').length;
+                selectedCountElement.textContent = selectedCount;
+                
+                if (selectedCount >= maxSelection) {
+                    checkboxes.forEach(checkbox => {
+                        if (!checkbox.checked) {
+                            checkbox.disabled = true;
+                            checkbox.parentElement.style.opacity = '0.6';
+                        }
+                    });
+                } else {
+                    checkboxes.forEach(checkbox => {
+                        checkbox.disabled = false;
+                        checkbox.parentElement.style.opacity = '1';
+                    });
+                }
+            }
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const courseCard = this.parentElement;
+                    courseCard.classList.toggle('selected', this.checked);
+                    updateSelectionCount();
+                    
+                    const selectedCount = document.querySelectorAll('.course-checkbox:checked').length;
+                    if (selectedCount > maxSelection) {
+                        this.checked = false;
+                        courseCard.classList.remove('selected');
+                        alert(`You can select a maximum of ${maxSelection} courses.`);
+                        updateSelectionCount();
+                    }
+                });
+            });
+                        if (courseModal) {
+                courseModal.addEventListener('show.bs.modal', function(event) {
+                    const button = event.relatedTarget;
+                    const courseId = button.getAttribute('data-course');
+                    const course = courseDetails[courseId];
+                    
+                    document.getElementById('modalTitle').textContent = course.title;
+                    document.getElementById('modalBody').innerHTML = course.content;
+                });
+            }
+            
+            updateSelectionCount();
+        });
+    </script>
+</body>
+</html>
